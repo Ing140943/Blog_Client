@@ -7,11 +7,16 @@ import moment from "moment";
 
 const Write = () => {
   const state = useLocation().state;
+  console.log("This is state");
+  console.log(state);
   const [value, setValue] = useState(state?.desc || "");
   const [title, setTitle] = useState(state?.title || "");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(state?.img || null);
   const [cat, setCat] = useState(state?.cat || "");
+  console.log("This is fucking file man");
+  console.log(file);
 
+  console.log("This is the image file call first time", file);
   const navigate = useNavigate();
 
   const upload = async () => {
@@ -19,7 +24,8 @@ const Write = () => {
       const formData = new FormData();
       formData.append("file", file);
       const res = await axios.post("/upload", formData);
-      // console.log(res.data);
+      console.log("This is res data", res.data);
+      setFile(res.data);
       return res.data;
     } catch (error) {
       console.log(error);
@@ -29,23 +35,23 @@ const Write = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     const imgUrl = await upload();
-
+    // console.log("This is image URL",imgUrl);
     try {
       state
         ? await axios.put(`/posts/${state.id}`, {
             title,
             desc: value,
             cat,
-            img: file ? imgUrl : "",
+            img: imgUrl || file,
           })
         : await axios.post(`/posts/`, {
             title,
             desc: value,
             cat,
             img: file ? imgUrl : "",
-            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
+            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
           });
-          navigate("/")
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -71,9 +77,13 @@ const Write = () => {
       <div className="menu">
         <div className="item">
           <h1>Publish</h1>
-          <span>
-            <b>Status: </b> Draft
-          </span>
+          <div className="img">
+            <img
+              src={`http://localhost:3000/uploads/${file}`}
+              alt="click to upload the new image"
+            />
+          </div>
+          {file ? <p><b>Status:</b> ready to publish</p>:<p>Nothing change</p>}
           <span>
             <b>Visibility: </b> Public
           </span>
@@ -81,6 +91,8 @@ const Write = () => {
             style={{ display: "none" }}
             type="file"
             id="file"
+            value=""
+            required
             onChange={(e) => setFile(e.target.files[0])}
           />
           <label className="file" htmlFor="file">
@@ -96,68 +108,68 @@ const Write = () => {
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "art"}
+              checked={cat === "action"}
               name="cat"
-              value="art"
-              id="art"
+              value="action"
+              id="action"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="art">Art</label>
+            <label htmlFor="action">Action</label>
           </div>
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "science"}
+              checked={cat === "sci-fi"}
               name="cat"
-              value="science"
-              id="science"
+              value="sci-fi"
+              id="sci-fi"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="science">Science</label>
+            <label htmlFor="sci-fi">Sci-Fi</label>
           </div>
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "technology"}
+              checked={cat === "romance"}
               name="cat"
-              value="technology"
-              id="technology"
+              value="romance"
+              id="romance"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="technology">Technology</label>
+            <label htmlFor="romance">Romance</label>
           </div>
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "cinema"}
+              checked={cat === "robot"}
               name="cat"
-              value="cinema"
-              id="cinema"
+              value="robot"
+              id="robot"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="cinema">Cinema</label>
+            <label htmlFor="robot">Robot</label>
           </div>
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "design"}
+              checked={cat === "fantasy"}
               name="cat"
-              value="design"
-              id="design"
+              value="fantasy"
+              id="fantasy"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="design">Design</label>
+            <label htmlFor="fantasy">Fantasy</label>
           </div>
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "food"}
+              checked={cat === "others"}
               name="cat"
-              value="food"
-              id="food"
+              value="others"
+              id="others"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="food">Food</label>
+            <label htmlFor="others">Others</label>
           </div>
         </div>
       </div>

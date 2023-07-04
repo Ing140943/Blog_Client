@@ -40,7 +40,7 @@ const Single = () => {
     }
   }
 
-  console.log(post);
+  //console.log(post);
 
   const getText = (html) =>{
     const doc = new DOMParser().parseFromString(html, "text/html")

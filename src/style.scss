@@ -69,6 +69,7 @@ $random-text: "Anime Blog";
         // NAVBAR
 
         .navbar {
+
             .container {
                 padding: 10px 0px;
                 display: flex;
@@ -82,6 +83,7 @@ $random-text: "Anime Blog";
                 }
                 .title{
                     font-size: 50px;
+                    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
                 }
                 .links{
                     display: flex;
@@ -118,9 +120,13 @@ $random-text: "Anime Blog";
 
                     .link{
                         &:hover {
+                            position: relative;
                             color: teal;
-                                background-color: white;
-                                border: teal;
+                            h6 {
+                                font-size: 20px;
+                            }
+                            font-size: 17px;
+                            font-style:oblique;
                         }
                     }
                 }
@@ -148,7 +154,7 @@ $random-text: "Anime Blog";
                 margin-top: 50px;
                 display: flex;
                 flex-direction: column;
-                gap: 150px; 
+                gap: 100px; 
 
                 .post {
                     display: flex;
@@ -161,6 +167,7 @@ $random-text: "Anime Blog";
                     .img {
                         flex: 2;
                         position: relative;
+                        
 
                         &::after {
                             content: "";
@@ -171,6 +178,7 @@ $random-text: "Anime Blog";
                             top: 20px;
                             left: -20px;
                             z-index: -1;
+                            border-radius: 25px;
 
                         }
 
@@ -178,6 +186,7 @@ $random-text: "Anime Blog";
                             width: 100%;
                             height: 85%;
                             object-fit: cover;
+                            border-radius: 25px;
                         }
                     }
 
@@ -186,6 +195,9 @@ $random-text: "Anime Blog";
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
+                        background-color: beige;
+                        padding: 25px;
+                        border-radius: 25px;
 
                         h1 {
                             font-size: 48px;
@@ -283,6 +295,7 @@ $random-text: "Anime Blog";
                 display: flex;
                 flex-direction: column;
                 gap: 25px;
+                
 
                 h1 {
                     font-size: 20px;
@@ -299,6 +312,7 @@ $random-text: "Anime Blog";
                     width: 100%;
                     height: 200px;
                     object-fit: cover;
+                    border-radius: 25px;
                 }
 
                 h2 {

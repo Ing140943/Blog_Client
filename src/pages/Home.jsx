@@ -23,6 +23,9 @@ const Home = () => {
         fetchData()
     }, [cat])   // This line means that whenever we change the category, it is gonna fire this function again and again 
 
+    const cutText = (text) => {
+        return text.slice(0, 500)+'...'
+    }
 
     // const posts = [
     //     {
@@ -61,8 +64,8 @@ const Home = () => {
                             <Link to={`/post/${post.id}`}>
                                 <h1>{post.title}</h1>
                             </Link>
-                            <p>{getText(post.desc)}</p> 
-                            <button>Read More</button>
+                            {getText(post.desc).length >= 500? <p>{cutText(getText(post.desc))}</p>:<p>{getText(post.desc)}</p>}
+                            <button><Link to={`/post/${post.id}`}>Read More</Link></button>
                         </div>
                     </div>
                 ))}
