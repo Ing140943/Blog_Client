@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 
 const Write = () => {
   const state = useLocation().state;
-  const [value, setValue] = useState(state?.title || "");
-  const [title, setTitle] = useState(state?.desc || "");
+  const [value, setValue] = useState(state?.desc || "");
+  const [title, setTitle] = useState(state?.title || "");
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState(state?.cat || "");
+
+  const navigate = useNavigate();
 
   const upload = async () => {
     try {
@@ -26,7 +28,7 @@ const Write = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const imgUrl = upload();
+    const imgUrl = await upload();
 
     try {
       state
@@ -36,13 +38,14 @@ const Write = () => {
             cat,
             img: file ? imgUrl : "",
           })
-        : await axios.post(`/posts/}`, {
+        : await axios.post(`/posts/`, {
             title,
             desc: value,
             cat,
             img: file ? imgUrl : "",
             date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")
           });
+          navigate("/")
     } catch (error) {
       console.log(error);
     }
