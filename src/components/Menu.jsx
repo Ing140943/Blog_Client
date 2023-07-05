@@ -9,7 +9,7 @@ const Menu = ({cat}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`${process.env.REACT_APP_SERVICES_PATH}/posts/?cat=${cat}`);
+                const res = await axios.get(`/posts/?cat=${cat}`);
                 setPosts(res.data);
             } catch (err) {
                 console.log(err);
@@ -25,7 +25,7 @@ const Menu = ({cat}) => {
                 <div className="post" key={post.id}>
                     <img src={`${post.img}`} alt="img"/>
                     <h2>{post.title}</h2>
-                    <button><Link to={`${process.env.REACT_APP_SERVICES_PATH}/post/${post.id}`}>Read More</Link></button>
+                    <button><Link to={`/post/${post.id}`}>Read More</Link></button>
                 </div>
             ) )}
         </div>
