@@ -29,7 +29,7 @@ const Register = () => {
     const handleSubmit = async e => {
         e.preventDefault()
         try {
-            await axios.post(`/auth/register`, inputs)
+            await axios.post(`${process.env.REACT_APP_SERVICES_PATH}/auth/register`, inputs)
             navigate(`/login`)
         } catch (err) {
             // .data from pathof the json 
