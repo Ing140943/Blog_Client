@@ -79,7 +79,8 @@ const Write = () => {
           <h1>Publish</h1>
           <div className="img">
             <img
-              src={`http://localhost:3000/uploads/${file}`}
+            //   src={`http://localhost:3000/uploads/${file}`}
+            src={`https://ing-anime-blog.onrender.com/uploads/${file}`}
               alt="click to upload the new image"
             />
           </div>
