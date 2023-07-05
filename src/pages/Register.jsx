@@ -24,8 +24,8 @@ const Register = () => {
     const handleSubmit = async e => {
         e.preventDefault()
         try {
-            await axios.post("/auth/register", inputs)
-            navigate("/login")
+            await axios.post(`${process.env.SERVICES_PATH}/auth/register`, inputs)
+            navigate(`${process.env.SERVICES_PATH}/login`)
         } catch (err) {
             // .data from pathof the json 
             setError(err.response.data)

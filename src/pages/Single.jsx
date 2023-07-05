@@ -51,7 +51,7 @@ const Single = () => {
     <div className="single">
       <div className="content">
         <img
-          src={`../uploads/${post?.img}`} //If it is loading the '?' will not make our app error
+          src={`${post?.img}`} //If it is loading the '?' will not make our app error
           alt="content-img"
         />
         <div className="user">

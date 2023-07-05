@@ -6,15 +6,12 @@ const Home = () => {
 
     const [posts, setPosts] = useState([])
 
-    // const location = useLocation();
-    // console.log(location);
-
     const cat = useLocation().search
 
     useEffect(() => {
         const fetchData = async ()=> {
             try {
-                const res = await axios.get(`/posts${cat}`)
+                const res = await axios.get(`${process.env.SERVICES_PATH}/posts${cat}`)
                 setPosts(res.data)
             }catch(err) {
                 console.log(err);
@@ -37,14 +34,14 @@ const Home = () => {
                 {posts.map((post) => (
                     <div className='post' key={post.id}>
                         <div className='img'>
-                            <img src={`../uploads/${post.img}`} alt='content-img' />
+                            <img src={post.img} alt='content-img' />
                         </div>
                         <div className='content'>
-                            <Link to={`/post/${post.id}`}>
+                            <Link to={`${process.env.SERVICES_PATH}/post/${post.id}`}>
                                 <h1>{post.title}</h1>
                             </Link>
                             {getText(post.desc).length >= 500? <p>{cutText(getText(post.desc))}</p>:<p>{getText(post.desc)}</p>}
-                            <button><Link to={`/post/${post.id}`}>Read More</Link></button>
+                            <button><Link to={`${process.env.SERVICES_PATH}/post/${post.id}`}>Read More</Link></button>
                         </div>
                     </div>
                 ))}

@@ -13,18 +13,14 @@ const Write = () => {
   const [title, setTitle] = useState(state?.title || "");
   const [file, setFile] = useState(state?.img || null);
   const [cat, setCat] = useState(state?.cat || "");
-  console.log("This is fucking file man");
-  console.log(file);
 
-  console.log("This is the image file call first time", file);
   const navigate = useNavigate();
 
   const upload = async () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("/upload", formData);
-      console.log("This is res data", res.data);
+      const res = await axios.post(`${process.env.SERVICES_PATH}/upload`, formData);
       setFile(res.data);
       return res.data;
     } catch (error) {
@@ -35,16 +31,15 @@ const Write = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     const imgUrl = await upload();
-    // console.log("This is image URL",imgUrl);
     try {
       state
-        ? await axios.put(`/posts/${state.id}`, {
+        ? await axios.put(`${process.env.SERVICES_PATH}/posts/${state.id}`, {
             title,
             desc: value,
             cat,
             img: imgUrl || file,
           })
-        : await axios.post(`/posts/`, {
+        : await axios.post(`${process.env.SERVICES_PATH}/posts/`, {
             title,
             desc: value,
             cat,
@@ -80,7 +75,7 @@ const Write = () => {
           <div className="img">
             <img
             //   src={`http://localhost:3000/uploads/${file}`}
-            src={`https://ing-anime-blog.onrender.com/uploads/${file}`}
+            src={`${process.env.SERVICES_PATH}/uploads/${file}`}
               alt="click to upload the new image"
             />
           </div>
