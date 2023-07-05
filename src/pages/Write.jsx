@@ -20,7 +20,7 @@ const Write = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post(`/upload`, formData);
+      const res = await axios.post(`${process.env.REACT_APP_SERVICES_PATH}/upload`, formData);
       setFile(res.data);
       return res.data;
     } catch (error) {
@@ -33,13 +33,13 @@ const Write = () => {
     const imgUrl = await upload();
     try {
       state
-        ? await axios.put(`/posts/${state.id}`, {
+        ? await axios.put(`${process.env.REACT_APP_SERVICES_PATH}/posts/${state.id}`, {
             title,
             desc: value,
             cat,
             img: imgUrl || file,
           })
-        : await axios.post(`/posts/`, {
+        : await axios.post(`${process.env.REACT_APP_SERVICES_PATH}/posts/`, {
             title,
             desc: value,
             cat,
