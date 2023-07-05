@@ -17,33 +17,32 @@ const Layout = () => {
     </>
   )
 }
-const basePath = process.env.REACT_APP_SERVICES_PATH
 
 const router = createBrowserRouter([
   {
-    path: basePath,
+    path: '/',
     element: <Layout />,
     children: [
       {
-        path: basePath,
+        path: '/',
         element: <Home/>
       },
       {
-        path: `${basePath}/post/:id`,
+        path: '/post/:id',
         element: <Single />
       },
       {
-        path: `${basePath}/write`,
+        path: '/write',
         element: <Write />
       }
     ]
   },
   {
-    path: `${basePath}/Register`,
+    path: '/register',
     element: <Register />,
   },
   {
-    path: `${basePath}/Login`,
+    path: '/login',
     element: <Login />,
   },
   
