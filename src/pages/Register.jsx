@@ -31,7 +31,7 @@ const Register = () => {
         try {
             console.log(process.env.REACT_APP_SERVICES_PATH);
             await axios.post(`${process.env.REACT_APP_SERVICES_PATH}/auth/register`, inputs)
-            navigate(`${process.env.REACT_APP_SERVICES_PATH}/login`)
+            navigate(`/login`)
         } catch (err) {
             // .data from pathof the json 
             setError(err.response.data)
