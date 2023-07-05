@@ -11,7 +11,7 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async ()=> {
             try {
-                const res = await axios.get(`${process.env.SERVICES_PATH}/posts${cat}`)
+                const res = await axios.get(`${process.env.REACT_APP_SERVICES_PATH}/posts${cat}`)
                 setPosts(res.data)
             }catch(err) {
                 console.log(err);
@@ -37,11 +37,11 @@ const Home = () => {
                             <img src={post.img} alt='content-img' />
                         </div>
                         <div className='content'>
-                            <Link to={`${process.env.SERVICES_PATH}/post/${post.id}`}>
+                            <Link to={`${process.env.REACT_APP_SERVICES_PATH}/post/${post.id}`}>
                                 <h1>{post.title}</h1>
                             </Link>
                             {getText(post.desc).length >= 500? <p>{cutText(getText(post.desc))}</p>:<p>{getText(post.desc)}</p>}
-                            <button><Link to={`${process.env.SERVICES_PATH}/post/${post.id}`}>Read More</Link></button>
+                            <button><Link to={`${process.env.REACT_APP_SERVICES_PATH}/post/${post.id}`}>Read More</Link></button>
                         </div>
                     </div>
                 ))}

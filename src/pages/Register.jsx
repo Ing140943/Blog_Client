@@ -20,12 +20,18 @@ const Register = () => {
             [e.target.name]: e.target.value
         }))
     }
+
+    const getText = (html) => {
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        return doc.body.textContent;
+    }
     
     const handleSubmit = async e => {
         e.preventDefault()
         try {
-            await axios.post(`${process.env.SERVICES_PATH}/auth/register`, inputs)
-            navigate(`${process.env.SERVICES_PATH}/login`)
+            console.log(process.env.REACT_APP_SERVICES_PATH);
+            await axios.post(`${process.env.REACT_APP_SERVICES_PATH}/auth/register`, inputs)
+            navigate(`${process.env.REACT_APP_SERVICES_PATH}/login`)
         } catch (err) {
             // .data from pathof the json 
             setError(err.response.data)
@@ -41,7 +47,7 @@ const Register = () => {
                 <input required type='email' placeholder='email' name="email" onChange={handleChange}/>
                 <input required type='password' placeholder='password' name="password" onChange={handleChange}/>
                 <button onClick={handleSubmit}>Register</button>
-                {err && <p>{err}</p>}
+                {err && <p>{getText(err)}</p>}
                 <span>Don't you have an account? <Link to='/login' >Login</Link></span>
             </form>
         </div>
