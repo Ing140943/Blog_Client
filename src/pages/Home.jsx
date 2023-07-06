@@ -12,6 +12,7 @@ const Home = () => {
         const fetchData = async ()=> {
             try {
                 const res = await axios.get(`${process.env.REACT_APP_SERVICES_PATH}/posts${cat}`)
+                console.log(res.data);
                 setPosts(res.data)
             }catch(err) {
                 console.log(err);
