@@ -5,6 +5,7 @@ import axios from "axios"
 const Home = () => {
 
     const [posts, setPosts] = useState([])
+    const [loading, setLoading] = useState(true);
 
     const cat = useLocation().search
 
@@ -14,8 +15,10 @@ const Home = () => {
                 const res = await axios.get(`${process.env.REACT_APP_SERVICES_PATH}/posts${cat}`)
                 console.log(res.data);
                 setPosts(res.data)
+                setLoading(false);
             }catch(err) {
                 console.log(err);
+                setLoading(false);
             }
         }
         fetchData()
@@ -29,6 +32,15 @@ const Home = () => {
         const doc = new DOMParser().parseFromString(html, "text/html");
         return doc.body.textContent;
     }
+
+    if (loading) {
+        return <div>Loading...</div>;
+      }
+    
+      if (posts.length === 0) {
+        return <div>No posts found.</div>;
+      }
+      
     return (
         <div className='home'>
             <div className='posts'>
